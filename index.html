@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Palacio360 - Cinta de Logos Premium iOS Corregida</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js" type="text/javascript"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "ios-bg": "#fbfbfd",
+                        "ios-glass": "rgba(255, 255, 255, 0.75)",
+                        "ios-glass-border": "rgba(255, 255, 255, 0.8)",
+                        "ios-text": "#1d1d1f",
+                        "ios-subtext": "#86868b",
+                        "premium-emerald": "#0fbd83",
+                        "premium-emerald-dark": "#0a8f63",
+                        "premium-emerald-light": "#e0f8ef",
+                    },
+                    fontFamily: {
+                        "body": ["Manrope", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {
+                        "2xl": "1.5rem", 
+                        "3xl": "2.5rem",
+                        "4xl": "3rem",
+                        "pill": "9999px"
+                    },
+                    boxShadow: {
+                        "glass": "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
+                        "soft-xl": "0 20px 40px -10px rgba(0, 0, 0, 0.05)",
+                        "glow": "0 0 20px rgba(15, 189, 131, 0.25)"
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    .text-shadow-hero {
+    /* Esto crea dos sombras: una fina y fuerte para definir bordes, y una suave y grande para separar del fondo */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.85), 0 10px 20px rgba(0,0,0,0.7);
+}
+        body {
+            background-color: #fbfbfd;
+            color: #1d1d1f;
+            scroll-behavior: smooth;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 1);
+            transform: translateY(-4px) scale(1.005);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(135deg, #1d1d1f 0%, #4a4a4f 100%);
+        }::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d1d6; 
+            border-radius: 10px;
+        }
+        .pnlm-container {
+            background-color: #f0f0f0;
+        }
+        .pnlm-ui, .pnlm-grab, .pnlm-controls-container, .pnlm-about-msg, .pnlm-load-box {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+        #panorama {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+            filter: brightness(1.05) saturate(1.05);}
+        .pnlm-render-container {
+            cursor: default !important;
+        }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-8px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }.ios-input {
+            background: rgba(242, 242, 247, 0.5);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .ios-input:focus {
+            background: #fff;
+            border-color: #0fbd83;
+            box-shadow: 0 0 0 4px rgba(15, 189, 131, 0.1);
+        }
+        .text-shadow-hero {
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        /* Estilos para tooltips y modal */
+        .tooltip-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 200px;
+            background: #333;
+            color: #fff;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+            z-index: 50;
+            pointer-events: none;
+        }
+        .tooltip-trigger:hover .tooltip-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        #modal-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        #modal-overlay.active #modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-premium-emerald/20 selection:text-premium-emerald-dark">
+    
+<div id="global-loader" class="fixed inset-0 z-[100] bg-[#fbfbfd] flex flex-col items-center justify-center transition-opacity duration-700">
+    <div class="relative">
+        <div class="w-20 h-20 border-4 border-gray-200 border-t-premium-emerald rounded-full animate-spin"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <span class="material-symbols-outlined text-premium-emerald text-2xl">view_in_ar</span>
+        </div>
+    </div>
+    <p class="mt-4 text-ios-text font-bold tracking-widest text-xs uppercase animate-pulse">Cargando Experiencia...</p>
+</div>
+
+<nav class="fixed w-full z-50 transition-all duration-300 top-6 px-4">
+<div class="glass-panel max-w-7xl mx-auto rounded-full px-6 py-4 flex items-center justify-between border border-white/40 shadow-soft-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-premium-emerald to-emerald-600 flex items-center justify-center text-white shadow-glow">
+<span class="material-symbols-outlined text-lg">view_in_ar</span>
+</div>
+<span class="font-body font-bold text-xl tracking-tight text-ios-text">Palacio<span class="font-light text-ios-subtext">360</span></span>
+</div>
+<div class="hidden md:flex items-center space-x-10 text-sm font-medium text-gray-500">
+<a class="hover:text-premium-emerald transition-colors duration-300" href="#giro">Por qué funciona</a>
+<a class="hover:text-premium-emerald transition-colors duration-300" href="#ofrecemos">Lo que hacemos</a>
+<a class="hover:text-premium-emerald transition-colors duration-300" href="#pricing">Precios</a>
+<a class="hover:text-premium-emerald transition-colors duration-300" href="#faq">Dudas frecuentes</a>
+</div>
+<button class="bg-black text-white hover:bg-gray-800 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-lg transform hover:scale-105">
+            Hablemos
+        </button>
+</div>
+</nav>
+<header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<div id="panorama"></div>
+<div class="relative z-10 max-w-5xl mx-auto px-6 lg:px-12 w-full text-center flex flex-col items-center justify-center h-full pt-24 pointer-events-none">
+    
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight text-white mb-6 animate-fade-in-up delay-100 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
+    Haz que tus clientes <br/>
+    <span class="font-serif italic font-normal text-white">
+        se enamoren de tu espacio antes de llegar.
+    </span>
+</h1>
+
+    <div class="inline-block relative animate-fade-in-up delay-200 mb-8">
+        <div class="absolute inset-0 bg-black/30 blur-xl rounded-full transform scale-110 -z-10"></div>
+        <p class="relative text-base md:text-xl text-white font-medium leading-relaxed max-w-2xl mx-auto px-4 drop-shadow-md">
+            Dale a tus visitantes un tour completo 24/7. Sin citas, sin esperas, y con la calidad visual que tu marca merece.
+        </p>
+    </div>
+<div class="flex flex-col sm:flex-row gap-5 items-center justify-center pointer-events-auto animate-fade-in-up delay-300">
+<button class="group bg-premium-emerald hover:bg-emerald-500 text-white px-10 py-4 rounded-full text-base font-bold transition-all shadow-[0_10px_30px_rgba(15,189,131,0.3)] hover:shadow-[0_15px_40px_rgba(15,189,131,0.4)] flex items-center justify-center gap-3 min-w-[180px] hover:scale-105 text-shadow-hero">
+<span>Agenda una llamada</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">call</span>
+</button>
+<button class="group bg-white/60 hover:bg-white/80 backdrop-blur-md text-ios-text border border-white/60 px-10 py-4 rounded-full text-base font-medium transition-all flex items-center justify-center gap-3 min-w-[180px] hover:border-white shadow-sm text-shadow-hero">
+<span class="material-symbols-outlined text-gray-800 group-hover:rotate-45 transition-transform">play_circle</span>
+<span>Ver cómo funciona</span>
+</button>
+</div>
+</div>
+</header>
+<script>
+    // ESTE SCRIPT ES SOLO PARA EL VISOR DEL HEADER (FONDO)
+    document.addEventListener('DOMContentLoaded', function() {
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "https://i.ibb.co/4wtcNbDb/piscina-7-1.jpg",
+            "autoLoad": true,
+            "autoRotate": -2, // Velocidad de giro
+            "showControls": false,
+            "mouseZoom": false,
+            "draggable": false,
+            "keyboardZoom": false,
+            "compass": false,
+            "showFullscreenCtrl": false,
+            "showZoomCtrl": false,
+            
+            // AQUÍ ESTÁ EL CAMBIO CLAVE:
+            "hfov": 30,  // Antes era 100. Al bajarlo a 30, hacemos un zoom potente.
+            
+            "pitch": -5 // Esto inclina la cámara un poquito hacia abajo para ver la piscina
+        });
+    });
+</script>
+<section class="relative z-30 -mt-8 mb-16 px-4">
+<div class="max-w-3xl mx-auto">
+<div class="glass-panel rounded-full py-3 px-4 md:py-8 md:px-10 border border-white/50 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1),0_10px_20px_-5px_rgba(0,0,0,0.05)] backdrop-blur-[24px]">
+    <div class="flex flex-col items-center justify-center gap-3 md:gap-6">
+        <p class="text-[9px] md:text-[11px] font-bold tracking-[0.2em] text-gray-400 uppercase font-body text-center">Tecnología de Vanguardia</p>
+        
+        <div class="flex flex-nowrap items-center justify-between gap-3 md:gap-12 w-full opacity-80">
+            
+            <img alt="Adobe" class="h-10 md:h-14 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition-opacity duration-300" src="https://i.ibb.co/4nCY2VNs/Adobe-Logo.webp"/>
+            
+            <img alt="Sony" class="h-6 md:h-10 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition-opacity duration-300" src="https://i.ibb.co/CpSCBW18/Sony-logo.webp"/>
+            
+            <img alt="Apple" class="h-10 md:h-14 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition-opacity duration-300" src="https://i.ibb.co/n9C3jtR/ipple-logo.webp"/>
+            
+            <img alt="DJI" class="h-8 md:h-14 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition-opacity duration-300" src="https://i.ibb.co/DgHh5RWS/dji-Logo.webp"/>
+            
+            <img alt="Insta360" class="h-10 md:h-14 w-auto object-contain grayscale opacity-60 hover:opacity-100 transition-opacity duration-300" src="https://i.ibb.co/PsL88Rrq/insta360-Logo.webp"/>
+        </div>
+    </div>
+</div>
+</section>
+<section class="py-24 lg:py-32 relative" id="giro">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="text-center max-w-3xl mx-auto mb-24">
+<span class="text-premium-emerald font-semibold tracking-[0.2em] text-xs uppercase bg-premium-emerald-light px-4 py-1.5 rounded-full border border-premium-emerald/10">Por qué funciona</span>
+<h2 class="mt-8 text-4xl lg:text-5xl font-serif italic text-ios-text">Tus clientes ya no reservan a ciegas <span class="not-italic text-gray-500">(y eso es bueno para ti)</span></h2>
+</div>
+<div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+<div class="order-2 lg:order-1 space-y-8">
+
+<div class="glass-card p-8 rounded-3xl flex gap-6 group">
+<div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-premium-emerald group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">sentiment_satisfied</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-ios-text mb-2 font-serif italic">Confianza desde el primer vistazo</h3>
+<p class="text-gray-500 leading-relaxed font-light">
+                            Cuando un cliente puede caminar virtualmente por tu espacio, la duda desaparece. Y cuando la duda se va, la reserva llega.
+                        </p>
+</div>
+</div>
+<div class="glass-card p-8 rounded-3xl flex gap-6 group">
+<div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-premium-emerald group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">thumb_up</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-ios-text mb-2 font-serif italic">Clientes más felices = menos problemas</h3>
+<p class="text-gray-500 leading-relaxed font-light">
+                            Evita el típico "pensé que la habitación era más grande". Tus clientes llegan sabiendo exactamente qué esperar.
+                        </p>
+</div>
+</div>
+<div class="glass-card p-8 rounded-3xl flex gap-6 group">
+<div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-premium-emerald group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-ios-text mb-2 font-serif italic">Tu espacio, abierto 24/7</h3>
+<p class="text-gray-500 leading-relaxed font-light">
+                            Mientras duermes, tu tour virtual sigue vendiendo por ti. Es como tener a tu mejor vendedor trabajando sin descanso.
+                        </p>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2 relative group">
+<div class="absolute inset-0 bg-gradient-to-tr from-premium-emerald/20 to-blue-500/20 rounded-[2.5rem] rotate-3 transform transition-transform group-hover:rotate-6 blur-3xl opacity-60"></div>
+<div class="relative rounded-[2.5rem] overflow-hidden border border-white/60 shadow-soft-xl bg-white aspect-[4/5] lg:aspect-square">
+    <div id="panorama-feature" class="w-full h-full absolute inset-0 z-10 pointer-events-auto" style="cursor: grab; touch-action: none;"></div>
+    
+<div class="absolute bottom-8 -left-4 z-20 glass-panel px-8 py-5 rounded-2xl shadow-lg flex items-center gap-5 backdrop-blur-xl animate-float pointer-events-none">
+<span class="text-5xl font-bold text-premium-emerald">+5x</span>
+<div class="text-sm font-medium leading-tight text-ios-text border-l border-gray-300 pl-4">
+                            Tiempo de<br/>
+<span class="text-gray-500">Retención</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 relative overflow-hidden bg-[#fbfbfd]">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="flex flex-col items-center mb-12 gap-2 text-center">
+<div class="max-w-2xl">
+<h2 class="text-4xl lg:text-5xl font-serif italic text-ios-text mb-4">Proyectos destacados</h2>
+<p class="text-xl text-gray-500 font-light">Explora más de nuestras capturas inmersivas recientes.</p>
+</div>
+</div>
+<div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+
+    <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+        <div class="absolute inset-0 z-0 bg-gray-100">
+            <iframe src="https://tour.panoee.net/69156282697cc60f7567c607" 
+                    width="100%" height="100%" frameborder="0" 
+                    allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen 
+                    style="border-radius: 1.5rem;"></iframe>
+        </div>
+        
+        <div id="cover-1" class="absolute inset-0 z-10 bg-black">
+            <img alt="Cabaña Alpinia Glamping" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9KKFZTDwTvPV4YyN_oSN9wgEUQOIoMnGU9nhaoV2s1M2FLd43XAUE-V8l6Bf-OTezzwNmMZtDDOFAmcUJPxmv9Fh_tvUx5aYywV80jESITZ3AW_Z3pQg8ctM4w_F-EYnqpbmkwm071n6ii4joRRMZv0i6XfbLTOi4pdjEjH7675MxriTxcLb1b8XRjaEw-mhrm8PVB_UlWHE7K4bVgN9c1rNJlZhintPqAL2odSXtOrhomxXoGWzOQFxNIsAan9pdaBJEtOcBQdsw"/>
+            
+            <div class="absolute top-4 right-4 z-20">
+                <span class="glass-panel backdrop-blur-md bg-white/40 px-4 py-1.5 rounded-full text-xs font-bold text-white border border-white/30 uppercase tracking-wider">Glamping</span>
+            </div>
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            
+            <div class="absolute bottom-0 left-0 w-full p-8 z-20">
+                <h3 class="text-2xl font-bold text-white mb-2 font-serif italic">Cabaña Alpinia</h3>
+                <p class="text-gray-200 text-sm font-light leading-relaxed mb-6">Recorrido completo por las instalaciones.</p>
+                
+                <button onclick="revealTour('cover-1')" 
+                        class="group/btn flex items-center gap-2 text-white hover:text-premium-emerald transition-all duration-300 relative z-30 cursor-pointer outline-none">
+                    <span class="font-serif italic text-lg border-b border-white/50 group-hover/btn:border-premium-emerald pb-0.5 shadow-black/50 drop-shadow-md">Ver Tour 360º</span>
+                    <span class="material-symbols-outlined text-xl group-hover/btn:translate-x-1 transition-transform drop-shadow-md">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+        <div class="absolute inset-0 z-0 bg-gray-100">
+            <iframe src="https://tour.panoee.net/69156202697cc60f7567c607/69162dc971b43c4a2089b632" 
+                    width="100%" height="100%" frameborder="0" 
+                    allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen 
+                    style="border-radius: 1.5rem;"></iframe>
+        </div>
+        
+        <div id="cover-2" class="absolute inset-0 z-10 bg-black">
+            <img alt="Hotel Boutique Sereno" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwYS-NLG-PBu9cdnv1YPUpMT_F7Vg09JDqWx2i51c6lbHHfsUaHaGVRTLngKWwhSRU4t4frpM4QbiZGTVcYlAkEt6r2aQPDgHdPHqMpgXDFBkexwxMYK312Xuzr3OMqZf-uNUzBnI9_AWwCDacTwBEv8UnSmEWSkE_pg6dAy_qwqZLCIzTxckN3xH8yLPsLff5vGEAF9NzKZ4nG79Jrq67oNGKGzbfdcVXpDAT9q6_6Tkwi3swE1HPUKCHQNtaTT7NRw8pzcj_6f4M"/>
+            
+            <div class="absolute top-4 right-4 z-20">
+                <span class="glass-panel backdrop-blur-md bg-white/40 px-4 py-1.5 rounded-full text-xs font-bold text-white border border-white/30 uppercase tracking-wider">Hotel</span>
+            </div>
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            
+            <div class="absolute bottom-0 left-0 w-full p-8 z-20">
+                <h3 class="text-2xl font-bold text-white mb-2 font-serif italic">Hotel Boutique Sereno</h3>
+                <p class="text-gray-200 text-sm font-light leading-relaxed mb-6">Ambiente y áreas de descanso.</p>
+                
+                <button onclick="revealTour('cover-2')" 
+                        class="group/btn flex items-center gap-2 text-white hover:text-premium-emerald transition-all duration-300 relative z-30 cursor-pointer outline-none">
+                    <span class="font-serif italic text-lg border-b border-white/50 group-hover/btn:border-premium-emerald pb-0.5 shadow-black/50 drop-shadow-md">Ver Tour 360º</span>
+                    <span class="material-symbols-outlined text-xl group-hover/btn:translate-x-1 transition-transform drop-shadow-md">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+        <div class="absolute inset-0 z-0 bg-gray-100">
+            <iframe src="https://tour.panoee.net/69156282697cc60f7567c607" 
+                    width="100%" height="100%" frameborder="0" 
+                    allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen 
+                    style="border-radius: 1.5rem;"></iframe>
+        </div>
+        
+        <div id="cover-3" class="absolute inset-0 z-10 bg-black">
+            <img alt="Restaurante El Mirador" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWxVCu00qPoOhkOYNBFStnVvMFlaOM3UxXfmU-KNufoZo7FmSdnh0ERmdWyyxHRIjiNwLm-o0Gx9Gf0G7_eE62MXwEsNgsdTr3WE0jovp5w7SOO5g7KV2tY_dZ0a2MC42H49IJStRy47pEhxRg2NPqJBupBs7c1CsXT6jtsniyqUNcAGMMbJa1XYpv7gdx4M8FK_Vm688Vi37mQGBKx75d-bnH1pspAhh4JvpyRcBq0TgT4ESuLf975uokwGIhFEnJCMc594AAtNMz"/>
+            
+            <div class="absolute top-4 right-4 z-20">
+                <span class="glass-panel backdrop-blur-md bg-white/40 px-4 py-1.5 rounded-full text-xs font-bold text-white border border-white/30 uppercase tracking-wider">Gastronomía</span>
+            </div>
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            
+            <div class="absolute bottom-0 left-0 w-full p-8 z-20">
+                <h3 class="text-2xl font-bold text-white mb-2 font-serif italic">Restaurante El Mirador</h3>
+                <p class="text-gray-200 text-sm font-light leading-relaxed mb-6">Recorrido por el salón principal.</p>
+                
+                <button onclick="revealTour('cover-3')" 
+                        class="group/btn flex items-center gap-2 text-white hover:text-premium-emerald transition-all duration-300 relative z-30 cursor-pointer outline-none">
+                    <span class="font-serif italic text-lg border-b border-white/50 group-hover/btn:border-premium-emerald pb-0.5 shadow-black/50 drop-shadow-md">Ver Tour 360º</span>
+                    <span class="material-symbols-outlined text-xl group-hover/btn:translate-x-1 transition-transform drop-shadow-md">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</section>
+<section class="py-24 relative overflow-hidden" id="ofrecemos">
+<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white to-[#f0f0f5] -z-10"></div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="text-center max-w-3xl mx-auto mb-20">
+<h2 class="text-4xl lg:text-5xl font-serif italic text-ios-text mb-6">Así trabajamos contigo</h2>
+<p class="text-xl text-gray-500 font-light">Cada propiedad es un mundo, y nos aseguramos de que el tuyo brille en cada pantalla.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="glass-card p-10 rounded-[2.5rem] h-full group relative overflow-hidden bg-white/70">
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-premium-emerald/5 rounded-full blur-2xl group-hover:bg-premium-emerald/10 transition-all"></div>
+<div class="w-16 h-16 rounded-2xl bg-white shadow-sm border border-gray-100 text-gray-400 flex items-center justify-center mb-8 transition-colors group-hover:bg-premium-emerald group-hover:text-white group-hover:border-premium-emerald">
+<span class="material-symbols-outlined text-3xl">photo_camera</span>
+</div>
+<h3 class="text-2xl font-bold text-ios-text mb-4 font-serif italic">Nosotros capturamos</h3>
+<p class="text-gray-500 leading-relaxed font-light">
+                    Vamos a tu ubicación, preparamos la iPalacioción y sacamos lo mejor de cada rincón. Tú solo abres la puerta, nosotros hacemos la magia.
+                </p>
+</div>
+<div class="glass-card p-10 rounded-[2.5rem] h-full group relative overflow-hidden bg-white/70">
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-50/50 rounded-full blur-2xl group-hover:bg-blue-100/50 transition-all"></div>
+<div class="w-16 h-16 rounded-2xl bg-white shadow-sm border border-gray-100 text-gray-400 flex items-center justify-center mb-8 transition-colors group-hover:bg-blue-500 group-hover:text-white group-hover:border-blue-500">
+<span class="material-symbols-outlined text-3xl">edit</span>
+</div>
+<h3 class="text-2xl font-bold text-ios-text mb-4 font-serif italic">Nosotros editamos</h3>
+<p class="text-gray-500 leading-relaxed font-light">
+                    No solo pegamos fotos. Corregimos color, eliminamos imperfecciones y aseguramos que el recorrido fluya suave como la seda.
+                </p>
+</div>
+<div class="glass-card p-10 rounded-[2.5rem] h-full group relative overflow-hidden bg-white/70">
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-gray-100 rounded-full blur-2xl group-hover:bg-gray-200 transition-all"></div>
+<div class="w-16 h-16 rounded-2xl bg-white shadow-sm border border-gray-100 text-gray-400 flex items-center justify-center mb-8 transition-colors group-hover:bg-gray-800 group-hover:text-white group-hover:border-gray-800">
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+<h3 class="text-2xl font-bold text-ios-text mb-4 font-serif italic">Tú recibes reservas</h3>
+<p class="text-gray-500 leading-relaxed font-light">
+                    Te entregamos un enlace listo para usar. Lo pones en tu web, en WhatsApp o en Booking, y dejas que los clientes se convenzan solos.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-[#fbfbfd]" id="pricing">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="text-center max-w-3xl mx-auto mb-20">
+<h2 class="text-4xl lg:text-5xl font-serif italic text-ios-text mb-6">Inversión clara, sin sorpresas</h2>
+<p class="text-xl text-gray-500 font-light">Elige el paquete que mejor se adapte al tamaño de tu propiedad.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8 items-start">
+<div class="glass-card bg-white p-8 rounded-[2.5rem] border border-gray-100 hover:border-gray-200 relative shadow-soft-xl">
+<div class="mb-6">
+<h3 class="text-2xl font-bold text-ios-text mb-2 font-serif italic">Plan Esencial</h3>
+<p class="text-gray-500 text-sm">Perfecto para empezar.</p>
+</div>
+<div class="mb-8">
+<span class="text-4xl font-bold text-ios-text">$899</span>
+<span class="text-gray-400">/ pago único</span>
+</div>
+<ul class="space-y-4 mb-8 text-gray-600 text-sm">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Hasta 5 fotos 360°</li>
+<li class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> 
+    <span class="group relative flex items-center gap-1 cursor-help tooltip-trigger">
+        Hosting incluido 1 año
+        <span class="material-symbols-outlined text-xs text-gray-400">info</span>
+        <span class="tooltip-content">
+            El hosting es donde estará alojada tu landing page. Está incluido durante el primer año. Luego puedes renovarlo conmigo o gestionarlo de forma independiente.
+        </span>
+    </span>
+</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Listo en 48 horas</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Enlace para compartir</li>
+</ul>
+<button class="w-full bg-gray-100 hover:bg-gray-200 text-ios-text border border-transparent py-3 rounded-full text-sm font-bold transition-all mb-4">
+                    Empezar con Básico
+                </button>
+<div class="text-center">
+    <button class="text-xs text-gray-400 hover:text-premium-emerald underline cursor-pointer" onclick="openModal('basic')">Ver información completa</button>
+</div>
+</div>
+
+<div class="glass-card bg-white p-8 rounded-[2.5rem] border border-premium-emerald/30 relative shadow-glow transform scale-105 z-10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-premium-emerald to-emerald-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
+                    El más elegido
+                </div>
+<div class="mb-6 mt-2">
+<h3 class="text-2xl font-bold text-ios-text mb-2 font-serif italic">Plan Pro</h3>
+<p class="text-emerald-700/80 text-sm">Para mostrarlo todo.</p>
+</div>
+<div class="mb-8">
+<span class="text-5xl font-bold text-ios-text">$1,499</span>
+<span class="text-gray-400">/ pago único</span>
+</div>
+<ul class="space-y-4 mb-8 text-gray-700 text-sm font-medium">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Hasta 15 fotos 360°</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Menú de navegación fácil</li>
+<li class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> 
+    <span class="group relative flex items-center gap-1 cursor-help tooltip-trigger">
+        Hosting por 2 años
+        <span class="material-symbols-outlined text-xs text-gray-400">info</span>
+        <span class="tooltip-content">
+            El hosting es donde estará alojada tu landing page. Está incluido durante 2 años. Luego puedes renovarlo conmigo o gestionarlo de forma independiente.
+        </span>
+    </span>
+</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Lo subimos a Google Maps</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Botones de información</li>
+</ul>
+<button class="w-full bg-premium-emerald hover:bg-emerald-500 text-white py-3 rounded-full text-sm font-bold transition-all shadow-[0_4px_15px_rgba(15,189,131,0.3)] mb-4">
+                    Quiero el Pro
+                </button>
+<div class="text-center">
+    <button class="text-xs text-gray-400 hover:text-premium-emerald underline cursor-pointer" onclick="openModal('pro')">Ver información completa</button>
+</div>
+</div>
+
+<div class="glass-card bg-white p-8 rounded-[2.5rem] border border-gray-100 hover:border-gray-200 relative shadow-soft-xl">
+<div class="mb-6">
+<h3 class="text-2xl font-bold text-ios-text mb-2 font-serif italic">Plan Elite</h3>
+<p class="text-gray-500 text-sm">Experiencia premium total.</p>
+</div>
+<div class="mb-8">
+<span class="text-4xl font-bold text-ios-text">$2,999</span>
+<span class="text-gray-400">/ pago único</span>
+</div>
+<ul class="space-y-4 mb-8 text-gray-600 text-sm">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-yellow-500 text-lg">star</span> Fotos 360° Ilimitadas</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-yellow-500 text-lg">star</span> Video aéreo con Drone</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Listo para Realidad Virtual</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Reporte de visitas mensual</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-premium-emerald text-lg">check_circle</span> Atención prioritaria</li>
+</ul>
+<button class="w-full bg-gray-100 hover:bg-gray-200 text-ios-text border border-transparent py-3 rounded-full text-sm font-bold transition-all mb-4">
+                    Contactar para Elite
+                </button>
+<div class="text-center">
+    <button class="text-xs text-gray-400 hover:text-premium-emerald underline cursor-pointer" onclick="openModal('elite')">Ver información completa</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 relative overflow-hidden bg-[#fbfbfd]">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="text-center max-w-3xl mx-auto mb-20">
+<h2 class="text-4xl lg:text-5xl font-serif italic text-ios-text mb-6">Cómo funciona</h2>
+<p class="text-xl text-gray-500 font-light">Obtener tu recorrido virtual es sencillo y sin estrés</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card p-8 rounded-3xl h-full flex flex-col items-start bg-white/60">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-xl bg-premium-emerald-light flex items-center justify-center text-premium-emerald">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<span class="text-4xl font-serif italic text-premium-emerald/30 font-bold">01</span>
+</div>
+<h3 class="text-xl font-bold text-ios-text mb-3">Programar una visita</h3>
+<p class="text-gray-500 text-sm leading-relaxed font-light">
+                    Reserva un horario conveniente para que capturemos tu espacio.
+                </p>
+</div>
+<div class="glass-card p-8 rounded-3xl h-full flex flex-col items-start bg-white/60">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-xl bg-premium-emerald-light flex items-center justify-center text-premium-emerald">
+<span class="material-symbols-outlined">photo_camera</span>
+</div>
+<span class="text-4xl font-serif italic text-premium-emerald/30 font-bold">02</span>
+</div>
+<h3 class="text-xl font-bold text-ios-text mb-3">Sesión profesional</h3>
+<p class="text-gray-500 text-sm leading-relaxed font-light">
+                    Nuestro equipo captura cada ángulo con cámaras 360° de última generación.
+                </p>
+</div>
+<div class="glass-card p-8 rounded-3xl h-full flex flex-col items-start bg-white/60">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-xl bg-premium-emerald-light flex items-center justify-center text-premium-emerald">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<span class="text-4xl font-serif italic text-premium-emerald/30 font-bold">03</span>
+</div>
+<h3 class="text-xl font-bold text-ios-text mb-3">Edición experta</h3>
+<p class="text-gray-500 text-sm leading-relaxed font-light">
+                    Pulimos y optimizamos tu recorrido para lograr el máximo impacto.
+                </p>
+</div>
+<div class="glass-card p-8 rounded-3xl h-full flex flex-col items-start bg-white/60">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-xl bg-premium-emerald-light flex items-center justify-center text-premium-emerald">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<span class="text-4xl font-serif italic text-premium-emerald/30 font-bold">04</span>
+</div>
+<h3 class="text-xl font-bold text-ios-text mb-3">Lanzamiento y promoción</h3>
+<p class="text-gray-500 text-sm leading-relaxed font-light">
+                    Su recorrido se activa, listo para atraer e involucrar a los clientes.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 relative overflow-hidden bg-white">
+<div class="absolute inset-0 bg-gradient-to-b from-[#fbfbfd] to-white -z-10"></div>
+<div class="absolute top-20 left-10 w-64 h-64 bg-premium-emerald/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-20 right-10 w-64 h-64 bg-blue-100/40 rounded-full blur-3xl"></div>
+<div class="max-w-4xl mx-auto px-6 lg:px-12">
+<div class="glass-card p-10 lg:p-14 rounded-[3rem] shadow-soft-xl border border-white/80 bg-white/60 backdrop-blur-2xl">
+<div class="text-center mb-10">
+<span class="text-premium-emerald font-semibold uppercase tracking-widest text-xs mb-2 block">Reserva sin compromiso</span>
+<h2 class="text-3xl lg:text-4xl font-serif italic text-ios-text mb-4">Platiquemos un momento</h2>
+<p class="text-gray-500 font-light">Déjanos tus datos y te mandamos un mensaje por WhatsApp para ver cómo podemos ayudarte.</p>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 ml-4 uppercase tracking-wider">Tu Nombre</label>
+<input class="w-full ios-input rounded-2xl px-5 py-4 text-ios-text placeholder-gray-400 outline-none" placeholder="Ej. Juan Pérez" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 ml-4 uppercase tracking-wider">Tu Celular</label>
+<input class="w-full ios-input rounded-2xl px-5 py-4 text-ios-text placeholder-gray-400 outline-none" placeholder="Para escribirte por WhatsApp" type="tel"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 ml-4 uppercase tracking-wider">Tu Correo</label>
+<input class="w-full ios-input rounded-2xl px-5 py-4 text-ios-text placeholder-gray-400 outline-none" placeholder="hola@tuempresa.com" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 ml-4 uppercase tracking-wider">¿Qué negocio tienes?</label>
+<div class="relative">
+<select class="w-full ios-input rounded-2xl px-5 py-4 text-ios-text outline-none appearance-none cursor-pointer">
+<option disabled="" selected="" value="">Elige una opción</option>
+<option value="Inmobiliaria">Bienes Raíces / Inmobiliaria</option>
+<option value="Restaurante">Restaurante / Bar</option>
+<option value="Hotel">Hotel / Airbnb</option>
+<option value="Agencia">Agencia de Marketing</option>
+<option value="Otro">Otro diferente</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="text-xs font-bold text-gray-500 ml-4 uppercase tracking-wider">Cuéntanos un poco más</label>
+<textarea class="w-full ios-input rounded-2xl px-5 py-4 text-ios-text placeholder-gray-400 outline-none resize-none" placeholder="¿Qué te gustaría lograr con el recorrido 360?..." rows="3"></textarea>
+</div>
+<div class="md:col-span-2 mt-4">
+<button class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-4 rounded-2xl text-base font-bold transition-all shadow-lg flex items-center justify-center gap-2 group hover:-translate-y-1" type="button">
+<span>HABLEMOS POR WHATSAPP</span>
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<section class="py-24 relative overflow-hidden bg-[#fbfbfd]">
+<div class="absolute inset-0 z-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center bg-fixed mix-blend-overlay"></div>
+<div class="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
+<div class="glass-panel rounded-[3rem] p-10 lg:p-16 border border-white/60 shadow-soft-xl flex flex-col md:flex-row items-center gap-12 bg-white/70">
+<div class="w-48 h-48 lg:w-64 lg:h-64 flex-shrink-0 relative">
+<div class="absolute inset-0 bg-gradient-to-tr from-premium-emerald to-emerald-200 rounded-full blur-2xl opacity-30 animate-pulse"></div>
+<img alt="Andrés Trespalacios Profile" class="w-full h-full object-cover rounded-full border-4 border-white shadow-xl relative z-10 hover:scale-105 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMexFaRV7UK-_bS0BL854z0zNAhEg35cORuPfOH-FUEIvf-aQdFpEDnadQ9gntL_9MRXEMv1wmxh_3pXRlj-X5-F7Kr0AzZNqxcBohcsjHi_kmIylG3tBvklghiuR5l4YqJkZJ3aHLCnbPut6ReSmqZVpmU7EtpOSosKy9--pbaBCNYhpeXlhYWCH4mkKr3OSwKSp_wEK_m8Ve5k7pzBXZb9jYWgEwCkb5qPZdf2EW0ST_87eqsWLrWNJiOJYPJRN-jqApaBx83TnG"/>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h3 class="text-3xl lg:text-4xl font-serif italic text-ios-text mb-2">Andrés Trespalacios</h3>
+<p class="text-premium-emerald font-semibold uppercase tracking-widest text-xs mb-6">Fotógrafo Certificado Google Street View</p>
+<p class="text-gray-600 font-light text-lg mb-8 leading-relaxed">
+                    "Mi trabajo no es solo tomar fotos, es capturar la vibra de tu lugar. Llevo más de 10 años ayudando a espacios como el tuyo a brillar en internet. Entiendo que una buena luz puede ser la diferencia entre un 'meh' y un '¡quiero ir ahí!'."
+                </p>
+<div class="flex flex-col sm:flex-row items-center gap-8 border-t border-gray-200 pt-8">
+<div class="text-center sm:text-left">
+<span class="block text-3xl font-bold text-ios-text">50+</span>
+<span class="text-xs text-gray-500 uppercase tracking-wider">Hoteles Digitalizados</span>
+</div>
+<div class="hidden sm:block w-px h-10 bg-gray-200"></div>
+<div class="text-center sm:text-left">
+<span class="block text-3xl font-bold text-ios-text">12M+</span>
+<span class="text-xs text-gray-500 uppercase tracking-wider">Visitas Virtuales</span>
+</div>
+<div class="hidden sm:block w-px h-10 bg-gray-200"></div>
+<div class="flex gap-2">
+<span class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200 text-gray-400 hover:text-white hover:bg-premium-emerald hover:border-transparent transition-all cursor-pointer"><span class="material-symbols-outlined text-sm">photo_camera</span></span>
+<span class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200 text-gray-400 hover:text-white hover:bg-premium-emerald hover:border-transparent transition-all cursor-pointer"><span class="material-symbols-outlined text-sm">mail</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24" id="faq">
+<div class="max-w-4xl mx-auto px-6 lg:px-12">
+<h2 class="text-4xl font-serif italic text-ios-text mb-12 text-center">Dudas frecuentes</h2>
+<div class="space-y-4">
+<details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-ios-text">
+<span>¿Cuánto tardan en tomar las fotos?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
+</summary>
+<div class="text-gray-500 px-5 pb-5 font-light leading-relaxed">
+                    Depende del tamaño, pero generalmente estamos entre 3 y 5 horas en tu propiedad. Nos gusta ir temprano para aprovechar la mejor luz natural. No te preocupes, somos rápidos y discretos.
+                </div>
+</details>
+<details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-ios-text">
+<span>¿Necesito una página web especial?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
+</summary>
+<div class="text-gray-500 px-5 pb-5 font-light leading-relaxed">
+                    ¡Para nada! Te damos un código simple (como los de los videos de YouTube) que funciona en cualquier web: WordPress, Wix, la que tengas. Es copiar y pegar.
+                </div>
+</details>
+<details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-ios-text">
+<span>¿Se ve bien en el celular?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
+</summary>
+<div class="text-gray-500 px-5 pb-5 font-light leading-relaxed">
+                    Sí, se ve increíble. Optimizamos todo para que funcione fluido en cualquier celular, tablet o computadora. Tus clientes podrán visitarte desde la palma de su mano.
+                </div>
+</details>
+<details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-ios-text">
+<span>¿Hay que pagar algo cada mes?</span>
+<span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
+</summary>
+<div class="text-gray-500 px-5 pb-5 font-light leading-relaxed">
+                    El primer año va por nuestra cuenta en todos los planes. Después, hay una pequeña cuota anual de mantenimiento para que tus fotos sigan en línea y cargando rápido. Si prefieres, te damos los archivos y tú los alojas donde quieras.
+                </div>
+</details>
+</div>
+</div>
+</section>
+<footer class="py-20 border-t border-gray-200 bg-white/90 backdrop-blur-xl">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-premium-emerald flex items-center justify-center text-white shadow-glow">
+<span class="material-symbols-outlined text-sm">view_in_ar</span>
+</div>
+<span class="font-bold text-lg text-ios-text font-body tracking-tight">Palacio<span class="text-gray-400 font-light">360</span></span>
+</div>
+<p class="text-gray-500 text-sm leading-relaxed">
+                Ayudamos a hoteles y negocios a mostrarse al mundo tal como son: espectaculares. Tecnología 360, trato humano.
+            </p>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-premium-emerald transition-colors" href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
+<a class="text-gray-400 hover:text-premium-emerald transition-colors" href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+<a class="text-gray-400 hover:text-premium-emerald transition-colors" href="#"><span class="material-symbols-outlined">smart_display</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-ios-text font-bold mb-6">Explora</h4>
+<ul class="space-y-4 text-sm text-gray-500">
+<li><a class="hover:text-premium-emerald transition-colors" href="#giro">Por qué funciona</a></li>
+<li><a class="hover:text-premium-emerald transition-colors" href="#ofrecemos">Lo que hacemos</a></li>
+<li><a class="hover:text-premium-emerald transition-colors" href="#pricing">Precios</a></li>
+<li><a class="hover:text-premium-emerald transition-colors" href="#faq">Dudas frecuentes</a></li>
+</ul>
+</div>
+<div class="lg:col-span-2">
+<h4 class="text-ios-text font-bold mb-6">Escríbenos directo</h4>
+<form class="space-y-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<input class="bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 text-ios-text placeholder-gray-400 focus:outline-none focus:border-premium-emerald focus:ring-1 focus:ring-premium-emerald transition-all text-sm" placeholder="Tu nombre" type="text"/>
+<input class="bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 text-ios-text placeholder-gray-400 focus:outline-none focus:border-premium-emerald focus:ring-1 focus:ring-premium-emerald transition-all text-sm" placeholder="Tu correo" type="email"/>
+</div>
+<textarea class="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 text-ios-text placeholder-gray-400 focus:outline-none focus:border-premium-emerald focus:ring-1 focus:ring-premium-emerald transition-all text-sm" placeholder="¿En qué podemos ayudarte?" rows="3"></textarea>
+<button class="bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-sm font-bold transition-all shadow-lg w-full sm:w-auto" type="button">
+                    Enviar mensaje
+                </button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12 mt-16 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+<div>© 2023 Palacio360. Hecho con pasión.</div>
+<div class="flex gap-6">
+<a class="hover:text-premium-emerald transition-colors" href="#">Privacidad</a>
+<a class="hover:text-premium-emerald transition-colors" href="#">Términos</a>
+</div>
+</div>
+</footer>
+<a class="fixed bottom-8 right-8 z-50 bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] transition-all hover:scale-110 flex items-center justify-center group" href="#">
+<svg class="w-7 h-7 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+</svg>
+<span class="absolute right-full mr-4 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-2 group-hover:translate-x-0">¿Hablamos por aquí?</span>
+</a>
+
+<div id="modal-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div id="modal-content" class="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl relative">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <div id="modal-body">
+            </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- 1. LÓGICA DEL SPLASH SCREEN (PANTALLA DE CARGA) ---
+        const loader = document.getElementById('global-loader');
+        
+        if(loader) {
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.pointerEvents = 'none'; 
+            }, 2000); // 2 segundos y se va
+        }
+
+        // --- 2. CONFIGURACIÓN DEL FEATURE PANORAMA ("Por qué funciona") ---
+        var isMobileFeature = window.innerWidth < 768;
+        
+        if(document.getElementById('panorama-feature')) {
+            pannellum.viewer('panorama-feature', {
+                "type": "equirectangular",
+                "panorama": "https://i.ibb.co/4wtcNbDb/piscina-7-1.jpg", // ⚠️ PEGA TU ENLACE DE FOTO AQUÍ
+                "autoLoad": true,
+                "autoRotate": 2,
+                "hfov": isMobileFeature ? 30 : 100, // Zoom x4 en móvil
+                "showControls": false,
+                "draggable": true,
+                "mouseZoom": false,
+                "pitch": 0,
+                "yaw": 0
+            });
+        }
+        
+        // --- 3. INICIALIZAR MODAL OCULTO ---
+        const modalOverlay = document.getElementById('modal-overlay');
+        if(modalOverlay) {
+             modalOverlay.classList.add('hidden');
+             modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+        }
+    });
+
+    // --- FUNCIONES GLOBALES (FUERA DEL DOMContentLoaded PARA SER ACCESIBLES POR ONCLICK) ---
+
+    // A. REVELAR TOUR (QUITAR PORTADA)
+    function revealTour(coverId) {
+        var cover = document.getElementById(coverId);
+        if(cover) {
+            cover.style.transition = "opacity 0.8s ease";
+            cover.style.opacity = '0';
+            setTimeout(() => {
+                cover.style.display = 'none';
+            }, 800);
+        }
+    }
+
+    // B. LÓGICA DE MODALES DE PRECIOS
+    const planDetails = {
+        'basic': `
+            <h3 class="text-2xl font-bold text-ios-text mb-4">Detalles Plan Esencial</h3>
+            <p class="text-gray-600 mb-4">Este plan es ideal para propiedades pequeñas o para quienes inician.</p>
+            <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2">
+                <li>Sesión de fotos de 1 hora aprox.</li>
+                <li>Entrega de archivos optimizados.</li>
+                <li>Soporte vía WhatsApp por 3 meses.</li>
+            </ul>
+        `,
+        'pro': `
+            <h3 class="text-2xl font-bold text-ios-text mb-4 text-premium-emerald">Detalles Plan Pro</h3>
+            <p class="text-gray-600 mb-4">La opción más equilibrada para negocios establecidos.</p>
+            <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2">
+                <li>Sesión extendida (hasta 3 horas).</li>
+                <li>Retoque avanzado de iluminación.</li>
+                <li>Integración con tu ficha de Google My Business.</li>
+            </ul>
+        `,
+        'elite': `
+            <h3 class="text-2xl font-bold text-ios-text mb-4 text-yellow-600">Detalles Plan Elite</h3>
+            <p class="text-gray-600 mb-4">Cobertura total para grandes complejos o exigencia máxima.</p>
+            <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2">
+                <li>Jornada completa de grabación.</li>
+                <li>Video drone 4K incluido.</li>
+                <li>Prioridad absoluta en agenda y entrega.</li>
+            </ul>
+        `
+    };
+
+    function openModal(planType) {
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalBody = document.getElementById('modal-body');
+        
+        if(modalBody && modalOverlay) {
+            modalBody.innerHTML = planDetails[planType];
+            modalOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                modalOverlay.classList.add('active');
+            }, 10);
+        }
+    }
+
+    function closeModal() {
+        const modalOverlay = document.getElementById('modal-overlay');
+        if(modalOverlay) {
+            modalOverlay.classList.remove('active');
+            setTimeout(() => {
+                modalOverlay.classList.add('hidden');
+            }, 300);
+        }
+    }
+    // --- 2. CONFIGURACIÓN DEL FEATURE PANORAMA ("Por qué funciona") ---
+        var isMobileFeature = window.innerWidth < 768;
+        
+        if(document.getElementById('panorama-feature')) {
+            pannellum.viewer('panorama-feature', {
+                "type": "equirectangular",
+                "panorama": "https://i.ibb.co/4wtcNbDb/piscina-7-1.jpg", // ⚠️ Asegúrate de tener tu foto aquí
+                "autoLoad": true,
+                "autoRotate": 2, // Mantiene el giro automático
+                "hfov": isMobileFeature ? 30 : 100,
+                "showControls": false,
+                "draggable": true,  // ESTO PERMITE LA MANIPULACIÓN MANUAL
+                "mouseZoom": false,
+                "pitch": 0,
+                "yaw": 0
+            });
+        }
+</script>
+</body></html>
