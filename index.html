@@ -251,11 +251,14 @@
 <script>
     // ESTE SCRIPT ES SOLO PARA EL VISOR DEL HEADER (FONDO)
     document.addEventListener('DOMContentLoaded', function() {
+        // Detectar si es móvil
+        var isMobileHero = window.innerWidth < 768;
+
         pannellum.viewer('panorama', {
             "type": "equirectangular",
-            "panorama": "https://i.ibb.co/4wtcNbDb/piscina-7-1.jpg",
+            "panorama": "https://i.ibb.co/Z6YTNTHX/Piscina-1-2.jpg",
             "autoLoad": true,
-            "autoRotate": -2, // Velocidad de giro
+            "autoRotate": -2, 
             "showControls": false,
             "mouseZoom": false,
             "draggable": false,
@@ -264,10 +267,12 @@
             "showFullscreenCtrl": false,
             "showZoomCtrl": false,
             
-            // AQUÍ ESTÁ EL CAMBIO CLAVE:
-            "hfov": 30,  // Antes era 100. Al bajarlo a 30, hacemos un zoom potente.
+            // LÓGICA DE ZOOM AJUSTADA:
+            // PC: 110 (Más alejado/panorámico, aprox 40% más campo visual que el estándar)
+            // Móvil: 30 (Zoom potente x4, como pediste anteriormente)
+            "hfov": isMobileHero ? 30 : 180,  
             
-            "pitch": -5 // Esto inclina la cámara un poquito hacia abajo para ver la piscina
+            "pitch": -5 
         });
     });
 </script>
@@ -467,6 +472,34 @@
 </div>
 </div>
 </section>
+<section class="py-10 px-6 lg:px-12 relative z-20">
+        <div class="max-w-5xl mx-auto">
+            <div class="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-r from-premium-emerald to-emerald-800 shadow-2xl p-8 md:p-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8 group">
+                
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/20 transition-all duration-700"></div>
+                
+                <div class="relative z-10 max-w-xl">
+                    <h2 class="text-2xl md:text-3xl font-serif italic text-white mb-3">
+                        Si tu lugar enamora en persona, debe enamorar en pantalla.
+                    </h2>
+                    <p class="text-emerald-50 text-sm md:text-base font-light leading-relaxed">
+                        No permitas que una mala foto mate una venta. Dale a tu negocio la herramienta de ventas definitiva que trabaja 24/7.
+                    </p>
+                </div>
+
+                <div class="relative z-10 flex-shrink-0">
+                    <button onclick="toggleQuoteEngine()" class="bg-white text-premium-emerald hover:bg-emerald-50 px-8 py-4 rounded-xl text-sm font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-2 group/btn">
+                        <span>Cotizar mi proyecto</span>
+                        <span class="material-symbols-outlined text-lg group-hover/btn:rotate-45 transition-transform duration-300">arrow_outward</span>
+                    </button>
+                    <p class="text-center text-[10px] text-emerald-200 mt-3 opacity-80">
+                        Sin compromiso de compra
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
 <section class="py-16 relative bg-[#fbfbfd]" id="ofrecemos">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="text-center max-w-3xl mx-auto mb-12">
