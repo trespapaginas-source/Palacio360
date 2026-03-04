@@ -45,13 +45,28 @@
                         "glow": "0 0 20px rgba(15, 189, 131, 0.25)"
                     },
                     animation: {
-                        'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in-left': 'fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in-right': 'fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'zoom-in': 'zoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                         'float': 'float 6s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeInUp: {
-                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '0%': { opacity: 0, transform: 'translateY(30px)' },
                             '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        fadeInLeft: {
+                            '0%': { opacity: 0, transform: 'translateX(-50px)' },
+                            '100%': { opacity: 1, transform: 'translateX(0)' },
+                        },
+                        fadeInRight: {
+                            '0%': { opacity: 0, transform: 'translateX(50px)' },
+                            '100%': { opacity: 1, transform: 'translateX(0)' },
+                        },
+                        zoomIn: {
+                            '0%': { opacity: 0, transform: 'scale(0.95)' },
+                            '100%': { opacity: 1, transform: 'scale(1)' },
                         },
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
@@ -133,9 +148,14 @@
         .pnlm-render-container {
             cursor: default !important;
         }
+        
+        /* Utilidades de retardo para las animaciones */
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+        
         details summary::-webkit-details-marker {
             display: none;
         }
@@ -210,7 +230,7 @@
         <p class="mt-4 text-ios-text font-bold tracking-widest text-xs uppercase animate-pulse">Cargando Experiencia...</p>
     </div>
 
-    <nav class="fixed w-full z-50 transition-all duration-300 top-0 left-0 glass-panel border-b border-white/40 shadow-sm">
+    <nav class="fixed w-full z-50 transition-all duration-300 top-0 left-0 glass-panel border-b border-white/40 shadow-sm animate-fade-in-up">
         <div class="max-w-7xl mx-auto px-6 py-3 md:py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <a href="#">
@@ -233,30 +253,30 @@
         <div id="panorama"></div>
         <div class="relative z-10 max-w-5xl mx-auto px-6 lg:px-12 w-full text-center flex flex-col items-center justify-center h-full pt-20 md:pt-24 pointer-events-none">
             
-            <h1 class="text-3xl md:text-6xl lg:text-7xl font-heading font-semibold md:font-extrabold md:font-body leading-tight tracking-tight text-white mb-4 md:mb-6 animate-fade-in-up delay-100 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
+            <h1 class="opacity-0 text-3xl md:text-6xl lg:text-7xl font-heading font-semibold md:font-extrabold md:font-body leading-tight tracking-tight text-white mb-4 md:mb-6 animate-fade-in-up delay-100 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
                 Haz que tus clientes <br/>
                 <span class="font-normal md:font-serif md:italic text-white">
                     se enamoren de tu espacio antes de llegar.
                 </span>
             </h1>
 
-            <div class="inline-block relative animate-fade-in-up delay-200 mb-6 md:mb-8">
+            <div class="opacity-0 inline-block relative animate-fade-in-up delay-200 mb-6 md:mb-8">
                 <div class="absolute inset-0 bg-black/30 blur-xl rounded-full transform scale-110 -z-10"></div>
                 <p class="relative text-sm md:text-xl text-white font-medium leading-relaxed max-w-2xl mx-auto px-4 drop-shadow-md">
                     Dale a tus visitantes un tour completo 24/7. Sin citas, sin esperas, y con la calidad visual que tu marca merece.
                 </p>
             </div>
             
-            <div class="flex flex-col sm:flex-row gap-3 md:gap-5 items-center justify-center pointer-events-auto animate-fade-in-up delay-300 w-full px-4 md:px-0">
+            <div class="opacity-0 flex flex-col sm:flex-row gap-3 md:gap-5 items-center justify-center pointer-events-auto animate-fade-in-up delay-300 w-full px-4 md:px-0">
                 <button onclick="toggleQuoteEngine()" class="w-full sm:w-auto group bg-gradient-to-r from-premium-emerald to-emerald-600 hover:to-emerald-500 text-white px-8 py-3.5 md:px-10 md:py-4 rounded-full text-sm md:text-base font-bold transition-all shadow-[0_10px_30px_rgba(15,189,131,0.4)] hover:shadow-[0_20px_40px_rgba(15,189,131,0.6)] flex items-center justify-center gap-3 min-w-[180px] hover:scale-110 active:scale-95 text-shadow-hero ring-4 ring-transparent hover:ring-premium-emerald/20">
                     <span>Cotizar a medida</span>
                     <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">call</span>
                 </button>
                 
                 <a href="#proyectos" class="w-full sm:w-auto group bg-white/60 hover:bg-white/90 backdrop-blur-md text-ios-text border border-white/60 px-8 py-3.5 md:px-10 md:py-4 rounded-full text-sm md:text-base font-medium transition-all flex items-center justify-center gap-3 min-w-[180px] hover:border-white shadow-sm hover:shadow-lg [text-shadow:0_1px_2px_rgba(0,0,0,0.15)]">
-    <span class="material-symbols-outlined text-gray-800 group-hover:rotate-45 transition-transform">play_circle</span>
-    <span>Ver cómo funciona</span>
-</a>
+                    <span class="material-symbols-outlined text-gray-800 group-hover:rotate-45 transition-transform">play_circle</span>
+                    <span>Ver cómo funciona</span>
+                </a>
             </div>
         </div>
     </header>
@@ -283,7 +303,7 @@
     </script>
 
     <section class="relative z-30 -mt-6 md:-mt-8 mb-8 md:mb-16 px-4">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-3xl mx-auto reveal-on-scroll opacity-0" data-animation="animate-fade-in-up">
             <div class="glass-panel rounded-full py-2.5 px-4 md:py-8 md:px-10 border border-white/50 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1),0_10px_20px_-5px_rgba(0,0,0,0.05)] backdrop-blur-[24px]">
                 <div class="flex flex-col items-center justify-center gap-2 md:gap-6">
                     <p class="text-[9px] md:text-[11px] font-bold tracking-[0.2em] text-gray-400 uppercase font-body text-center">Tecnología de Vanguardia</p>
@@ -298,29 +318,30 @@
             </div>
         </div>
     </section>
-    <section class="py-8 md:py-12 relative z-20">
+    
+    <section class="py-8 md:py-12 relative z-20" id="stats-section">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="glass-card p-6 rounded-2xl text-center border border-white/60 shadow-sm flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300">
+                <div class="stat-card opacity-0 glass-card p-6 rounded-2xl text-center border border-white/60 shadow-sm flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300">
                     <h3 class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-heading">Hotelería y Turismo</h3>
-                    <span class="text-5xl md:text-6xl font-bold text-premium-emerald mb-3 font-heading">32%</span>
+                    <span class="counter-value text-5xl md:text-6xl font-bold text-premium-emerald mb-3 font-heading" data-target="32">0%</span>
                     <p class="text-sm text-gray-600 font-medium leading-snug max-w-[220px]">
                         Más reservas online al mostrar espacios en 360° antes de confirmar
                     </p>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl text-center border border-white/60 shadow-sm flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300">
+                <div class="stat-card opacity-0 delay-100 glass-card p-6 rounded-2xl text-center border border-white/60 shadow-sm flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300">
                     <h3 class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-heading">Inmuebles Comerciales</h3>
-                    <span class="text-5xl md:text-6xl font-bold text-premium-emerald mb-3 font-heading">58%</span>
+                    <span class="counter-value text-5xl md:text-6xl font-bold text-premium-emerald mb-3 font-heading" data-target="58">0%</span>
                     <p class="text-sm text-gray-600 font-medium leading-snug max-w-[220px]">
                         Aceleran el proceso de compra con tours virtuales en 360°
                     </p>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl text-center border border-white/60 shadow-sm flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300">
+                <div class="stat-card opacity-0 delay-200 glass-card p-6 rounded-2xl text-center border border-white/60 shadow-sm flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300">
                     <h3 class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-heading">Propiedades Residenciales</h3>
-                    <span class="text-5xl md:text-6xl font-bold text-premium-emerald mb-3 font-heading">74%</span>
+                    <span class="counter-value text-5xl md:text-6xl font-bold text-premium-emerald mb-3 font-heading" data-target="74">0%</span>
                     <p class="text-sm text-gray-600 font-medium leading-snug max-w-[220px]">
                         Venden más cuando los compradores recorren la vivienda en 360°
                     </p>
@@ -329,9 +350,10 @@
             </div>
         </div>
     </section>
+    
     <section class="py-10 md:py-20 relative" id="giro">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+            <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up">
                 <span class="text-premium-emerald font-semibold tracking-[0.2em] text-xs uppercase bg-premium-emerald-light px-4 py-1.5 rounded-full border border-premium-emerald/10">Por qué funciona</span>
                 <h2 class="mt-4 md:mt-6 text-2xl md:text-5xl font-heading font-semibold md:font-serif md:italic text-ios-text mb-4 md:mb-6 leading-tight">Esto es lo que ve tu cliente antes de decidir</h2>
                 <p class="text-gray-500 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
@@ -342,7 +364,7 @@
             
             <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
                 <div class="order-2 lg:order-1 space-y-4 md:space-y-6">
-                    <div class="glass-card p-5 md:p-6 rounded-3xl flex gap-4 md:gap-5 group items-start">
+                    <div class="glass-card p-5 md:p-6 rounded-3xl flex gap-4 md:gap-5 group items-start reveal-on-scroll opacity-0" data-animation="animate-fade-in-left" data-delay="delay-100">
                         <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-premium-emerald group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined text-xl md:text-2xl">visibility</span>
                         </div>
@@ -353,7 +375,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="glass-card p-5 md:p-6 rounded-3xl flex gap-4 md:gap-5 group items-start">
+                    <div class="glass-card p-5 md:p-6 rounded-3xl flex gap-4 md:gap-5 group items-start reveal-on-scroll opacity-0" data-animation="animate-fade-in-left" data-delay="delay-200">
                         <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-premium-emerald group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined text-xl md:text-2xl">thumb_up</span>
                         </div>
@@ -364,7 +386,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="glass-card p-5 md:p-6 rounded-3xl flex gap-4 md:gap-5 group items-start">
+                    <div class="glass-card p-5 md:p-6 rounded-3xl flex gap-4 md:gap-5 group items-start reveal-on-scroll opacity-0" data-animation="animate-fade-in-left" data-delay="delay-300">
                         <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-premium-emerald group-hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined text-xl md:text-2xl">storefront</span>
                         </div>
@@ -377,7 +399,7 @@
                     </div>
                 </div>
                 
-                <div class="order-1 lg:order-2 relative group">
+                <div class="order-1 lg:order-2 relative group reveal-on-scroll opacity-0" data-animation="animate-fade-in-right">
                     <div class="absolute inset-0 bg-gradient-to-tr from-premium-emerald/20 to-blue-500/20 rounded-[2.5rem] rotate-3 transform transition-transform group-hover:rotate-6 blur-3xl opacity-60"></div>
                     <div class="relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/60 shadow-soft-xl bg-white aspect-[4/5] lg:aspect-square">
                         
@@ -404,7 +426,7 @@
 
     <section class="py-10 md:py-24 relative overflow-hidden bg-[#fbfbfd]" id="proyectos">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="flex flex-col items-center mb-8 md:mb-12 gap-2 text-center">
+            <div class="flex flex-col items-center mb-8 md:mb-12 gap-2 text-center reveal-on-scroll opacity-0" data-animation="animate-fade-in-up">
                 <div class="max-w-2xl">
                     <h2 class="text-2xl md:text-5xl font-heading font-semibold md:font-serif md:italic text-ios-text mb-3 md:mb-4">Proyectos destacados</h2>
                     <p class="text-base md:text-xl text-gray-500 font-light">Explora más de nuestras capturas inmersivas recientes.</p>
@@ -413,12 +435,12 @@
             
             <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
 
-                <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+                <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-100">
                     <div class="absolute inset-0 z-0 bg-gray-100">
                         <iframe src="https://tour.panoee.net/697575e76a8abc8bfa0757eb" 
                                 width="100%" height="100%" frameborder="0" 
                                 allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen 
-                                style="border-radius: 1.5rem;"></iframe>
+                                style="border-radius: 1.5rem;" loading="lazy"></iframe>
                     </div>
                     
                     <div id="cover-1" class="absolute inset-0 z-10 bg-black transition-opacity duration-700">
@@ -446,12 +468,12 @@
                     </div>
                 </div>
 
-                <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+                <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-200">
                     <div class="absolute inset-0 z-0 bg-gray-100">
                         <iframe src="https://tour.panoee.net/69156202697cc60f7567c607/69162dc971b43c4a2089b632" 
                                 width="100%" height="100%" frameborder="0" 
                                 allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen 
-                                style="border-radius: 1.5rem;"></iframe>
+                                style="border-radius: 1.5rem;" loading="lazy"></iframe>
                     </div>
                     
                     <div id="cover-2" class="absolute inset-0 z-10 bg-black transition-opacity duration-700">
@@ -479,12 +501,12 @@
                     </div>
                 </div>
 
-                <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+                <div class="relative rounded-3xl overflow-hidden aspect-[4/5] md:aspect-auto md:h-[400px] shadow-soft-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-300">
                     <div class="absolute inset-0 z-0 bg-gray-100">
                         <iframe src="https://tour.panoee.net/69156282697cc60f7567c607" 
                                 width="100%" height="100%" frameborder="0" 
                                 allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen 
-                                style="border-radius: 1.5rem;"></iframe>
+                                style="border-radius: 1.5rem;" loading="lazy"></iframe>
                     </div>
                     
                     <div id="cover-3" class="absolute inset-0 z-10 bg-black transition-opacity duration-700">
@@ -517,7 +539,7 @@
     </section>
 
     <section class="py-8 px-4 md:py-10 md:px-12 relative z-20">
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-5xl mx-auto reveal-on-scroll opacity-0" data-animation="animate-zoom-in">
             <div class="relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-gradient-to-r from-premium-emerald to-emerald-800 shadow-2xl p-6 md:p-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 group">
                 
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/20 transition-all duration-700"></div>
@@ -547,12 +569,12 @@
 
     <section class="py-10 md:py-16 relative bg-[#fbfbfd]" id="ofrecemos">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+            <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up">
                 <h2 class="text-2xl md:text-5xl font-heading font-semibold md:font-serif md:italic text-ios-text mb-3 md:mb-4">Así trabajamos contigo</h2>
                 <p class="text-base md:text-xl text-gray-500 font-light">Cada propiedad es un mundo y nos aseguramos de que el tuyo brille en cada pantalla de los visitantes.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-                <div class="glass-card p-5 md:p-6 rounded-2xl h-full flex flex-col items-start bg-white/60">
+                <div class="glass-card p-5 md:p-6 rounded-2xl h-full flex flex-col items-start bg-white/60 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-100">
                     <div class="flex items-center gap-3 mb-3 md:mb-4">
                         <div class="w-10 h-10 rounded-lg bg-premium-emerald-light flex items-center justify-center text-premium-emerald">
                             <span class="material-symbols-outlined text-sm">calendar_month</span>
@@ -564,7 +586,7 @@
                         Agendamos tu sesión. Te asesoramos para aprovechar la mejor luz natural (mañana o tarde), clave para una toma perfecta, o la magia nocturna si tu espacio lo requiere.
                     </p>
                 </div>
-                <div class="glass-card p-5 md:p-6 rounded-2xl h-full flex flex-col items-start bg-white/60">
+                <div class="glass-card p-5 md:p-6 rounded-2xl h-full flex flex-col items-start bg-white/60 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-200">
                     <div class="flex items-center gap-3 mb-3 md:mb-4">
                         <div class="w-10 h-10 rounded-lg bg-premium-emerald-light flex items-center justify-center text-premium-emerald">
                             <span class="material-symbols-outlined text-sm">photo_camera</span>
@@ -576,7 +598,7 @@
                         No es solo tomar fotos. Encendemos cada luz de tu espacio y encontramos los ángulos estratégicos para que todo luzca amplio y acogedor.
                     </p>
                 </div>
-                <div class="glass-card p-5 md:p-6 rounded-2xl h-full flex flex-col items-start bg-white/60">
+                <div class="glass-card p-5 md:p-6 rounded-2xl h-full flex flex-col items-start bg-white/60 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-300">
                     <div class="flex items-center gap-3 mb-3 md:mb-4">
                         <div class="w-10 h-10 rounded-lg bg-premium-emerald-light flex items-center justify-center text-premium-emerald">
                             <span class="material-symbols-outlined text-sm">edit_note</span>
@@ -588,7 +610,7 @@
                         Corregimos color, eliminamos imperfecciones y pulimos cada detalle. No solo unimos fotos; creamos una experiencia fluida y real.
                     </p>
                 </div>
-                <div class="glass-card p-5 md:p-6 rounded-2xl h-full flex flex-col items-start bg-white/60">
+                <div class="glass-card p-5 md:p-6 rounded-2xl h-full flex flex-col items-start bg-white/60 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-400">
                     <div class="flex items-center gap-3 mb-3 md:mb-4">
                         <div class="w-10 h-10 rounded-lg bg-premium-emerald-light flex items-center justify-center text-premium-emerald">
                             <span class="material-symbols-outlined text-sm">rocket_launch</span>
@@ -607,12 +629,12 @@
     <section class="py-10 md:py-16 bg-[#fbfbfd]" id="pricing">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             
-            <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+            <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up">
                 <h2 class="text-2xl md:text-5xl font-heading font-semibold md:font-serif md:italic text-ios-text mb-3 md:mb-4">Precio de recorrido virtual</h2>
                 <p class="text-base md:text-xl text-gray-500 font-light">Tour 360 + landing que convierte visitas en reservas — Todo listo para publicar en 3–9 días.</p>
             </div>
 
-            <div class="flex justify-center items-center">
+            <div class="flex justify-center items-center reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-200">
                 
                 <div class="glass-card bg-white p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-gray-100 shadow-soft-xl relative overflow-hidden w-full max-w-2xl">
                     <div class="absolute top-0 right-0 bg-premium-emerald text-white text-[10px] md:text-xs font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-bl-2xl uppercase tracking-wider">
@@ -866,9 +888,9 @@
 
     <section class="py-10 md:py-16" id="faq">
         <div class="max-w-4xl mx-auto px-6 lg:px-12">
-            <h2 class="text-2xl md:text-4xl font-heading font-semibold md:font-serif md:italic text-ios-text mb-8 md:mb-12 text-center">Dudas frecuentes</h2>
+            <h2 class="text-2xl md:text-4xl font-heading font-semibold md:font-serif md:italic text-ios-text mb-8 md:mb-12 text-center reveal-on-scroll opacity-0" data-animation="animate-fade-in-up">Dudas frecuentes</h2>
             <div class="space-y-3 md:space-y-4">
-                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-100">
                     <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-4 md:p-5 text-ios-text text-sm md:text-base">
                         <span>¿Esto reemplaza mis fotos normales?</span>
                         <span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
@@ -878,7 +900,7 @@
                     </div>
                 </details>
 
-                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-200">
                     <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-4 md:p-5 text-ios-text text-sm md:text-base">
                         <span>¿Cuánto tardan en tomar las fotos?</span>
                         <span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
@@ -887,7 +909,7 @@
                         Depende del tamaño, pero generalmente estamos entre 3 y 5 horas en tu propiedad. Nos gusta ir temprano para aprovechar la mejor luz natural. No te preocupes, somos rápidos y discretos.
                     </div>
                 </details>
-                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-300">
                     <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-4 md:p-5 text-ios-text text-sm md:text-base">
                         <span>¿Necesito una página web especial?</span>
                         <span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
@@ -896,7 +918,7 @@
                         ¡Para nada! Te damos un código simple (como los de los videos de YouTube) que funciona en cualquier web: WordPress, Wix, la que tengas. Es copiar y pegar.
                     </div>
                 </details>
-                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-400">
                     <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-4 md:p-5 text-ios-text text-sm md:text-base">
                         <span>¿Se ve bien en el celular?</span>
                         <span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
@@ -905,7 +927,7 @@
                         Sí, se ve increíble. Optimizamos todo para que funcione fluido en cualquier celular, tablet o computadora. Tus clientes podrán visitarte desde la palma de su mano.
                     </div>
                 </details>
-                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100">
+                <details class="group glass-card bg-white rounded-2xl p-1 open:bg-white open:shadow-lg transition-all border border-gray-100 reveal-on-scroll opacity-0" data-animation="animate-fade-in-up" data-delay="delay-500">
                     <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-4 md:p-5 text-ios-text text-sm md:text-base">
                         <span>¿Hay que pagar algo cada mes?</span>
                         <span class="transition group-open:rotate-180 material-symbols-outlined text-gray-400">expand_more</span>
@@ -918,7 +940,7 @@
         </div>
     </section>
 
-    <footer class="py-10 md:py-16 border-t border-gray-200 bg-white/90 backdrop-blur-xl">
+    <footer class="py-10 md:py-16 border-t border-gray-200 bg-white/90 backdrop-blur-xl reveal-on-scroll opacity-0" data-animation="animate-fade-in-up">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             <div class="space-y-6">
                 <div class="flex items-center gap-3">
@@ -968,7 +990,7 @@
         </div>
     </footer>
 
-    <a class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 bg-[#25D366] hover:bg-[#20bd5a] text-white p-3 md:p-4 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] transition-all hover:scale-110 flex items-center justify-center group" href="#">
+    <a class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 bg-[#25D366] hover:bg-[#20bd5a] text-white p-3 md:p-4 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] transition-all hover:scale-110 flex items-center justify-center group reveal-on-scroll opacity-0" data-animation="animate-zoom-in" href="#">
         <svg class="w-6 h-6 md:w-7 md:h-7 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
         </svg>
@@ -1017,6 +1039,31 @@
                     saveQuoteProgress();
                 });
             }
+
+            // --- SCROLL REVEAL ANIMATIONS (OBSERVER) ---
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const animationClass = el.dataset.animation || 'animate-fade-in-up';
+                        const delayClass = el.dataset.delay || '';
+                        
+                        if(delayClass) {
+                            el.classList.add(delayClass);
+                        }
+                        
+                        el.classList.add(animationClass);
+                        el.classList.remove('opacity-0');
+                        observer.unobserve(el); // Solo se anima una vez
+                    }
+                });
+            }, { 
+                threshold: 0.15, // Se activa cuando el 15% del elemento es visible
+                rootMargin: '0px 0px -50px 0px' 
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
         });
 
         // --- FUNCIONES GLOBALES ---
@@ -1148,7 +1195,9 @@
             engine.classList.toggle('hidden');
             
             if(!engine.classList.contains('hidden')) {
-                engine.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Cambiamos 'start' por 'center' para que quede exactamente en medio de la pantalla
+                // y la barra de navegación no lo tape.
+                engine.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
 
@@ -1226,28 +1275,67 @@
 
         function validateStep(step) {
             let isValid = true;
+            // Remover mensajes de error previos
+            const existingErrors = document.querySelectorAll('.error-msg');
+            existingErrors.forEach(err => err.remove());
+
+            const showError = (elementId, message) => {
+                const el = document.getElementById(elementId);
+                const errorSpan = document.createElement('span');
+                errorSpan.className = 'error-msg text-[10px] text-red-500 font-bold mt-1 block animate-fade-in-up';
+                errorSpan.innerText = message;
+                el.parentNode.insertBefore(errorSpan, el.nextSibling);
+                el.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/20');
+                // Quitar el estilo de error al escribir
+                el.addEventListener('input', function removeError() {
+                    el.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/20');
+                    if(errorSpan.parentNode) errorSpan.remove();
+                    el.removeEventListener('input', removeError);
+                });
+            };
+
             if (step === 1) {
-                const bus = document.getElementById('business-type').value;
-                if (!bus) isValid = false;
-                if (bus === 'Otro' && !document.getElementById('other-business-input').value) isValid = false;
+                const bus = document.getElementById('business-type');
+                if (!bus.value) {
+                    isValid = false;
+                    showError('business-type', 'Por favor, selecciona tu tipo de negocio.');
+                }
+                const otherInput = document.getElementById('other-business-input');
+                if (bus.value === 'Otro' && !otherInput.value.trim()) {
+                    isValid = false;
+                    showError('other-business-input', 'Por favor, especifica tu negocio.');
+                }
             }
             if (step === 2) {
                 const radios = document.getElementsByName('spaces');
                 let checked = false;
                 for (const r of radios) if (r.checked) checked = true;
-                if (!checked) isValid = false;
+                if (!checked) {
+                    isValid = false;
+                    // Mostrar error general para los radios
+                    const radioContainer = document.querySelector('input[name="spaces"]').closest('.grid');
+                    const errorSpan = document.createElement('span');
+                    errorSpan.className = 'error-msg text-[10px] text-red-500 font-bold mt-2 block text-center animate-fade-in-up';
+                    errorSpan.innerText = 'Selecciona una cantidad de espacios aproximada.';
+                    radioContainer.parentNode.insertBefore(errorSpan, radioContainer.nextSibling);
+                }
             }
             if (step === 3) {
-                const name = document.getElementById('contact-name').value;
-                const phone = document.getElementById('contact-phone').value;
-                if (!name || name.length < 3) isValid = false;
-                if (!phone || phone.replace(/\D/g,'').length < 7) isValid = false;
+                const name = document.getElementById('contact-name');
+                const phone = document.getElementById('contact-phone');
+                if (!name.value.trim() || name.value.length < 3) {
+                    isValid = false;
+                    showError('contact-name', 'Ingresa un nombre válido (mínimo 3 letras).');
+                }
+                if (!phone.value.trim() || phone.value.replace(/\D/g,'').length < 7) {
+                    isValid = false;
+                    showError('contact-phone', 'Ingresa un número de WhatsApp válido.');
+                }
             }
             if (!isValid) {
                 const currentDiv = document.getElementById(`step-${step}`);
                 currentDiv.classList.add('animate-pulse');
                 setTimeout(() => currentDiv.classList.remove('animate-pulse'), 500);
-                alert('Por favor completa los campos obligatorios para continuar.');
             }
             return isValid;
         }
@@ -1314,6 +1402,58 @@
                 e.returnValue = '';
             }
         });
+        
+        // --- ANIMACIÓN DE ESTADÍSTICAS Y CONTADOR ON SCROLL ---
+        const statCards = document.querySelectorAll('.stat-card');
+        const counters = document.querySelectorAll('.counter-value');
+        let statsAnimated = false; 
+
+        // Función que hace correr los números
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000; // 2 segundos de animación
+                const increment = target / (duration / 16); 
+
+                let currentNum = 0;
+                const updateCounter = () => {
+                    currentNum += increment;
+                    if(currentNum < target) {
+                        counter.innerText = Math.ceil(currentNum) + '%';
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target + '%';
+                    }
+                };
+                updateCounter();
+            });
+        };
+
+        // Observador para saber cuándo la sección entra en pantalla
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // Si el usuario llega a la sección y no se ha animado antes
+                if (entry.isIntersecting && !statsAnimated) {
+                    statsAnimated = true;
+                    
+                    // 1. Mostrar las tarjetas desde abajo (fade-in-up)
+                    statCards.forEach((card) => {
+                        card.classList.remove('opacity-0');
+                        card.classList.add('animate-fade-in-up');
+                    });
+                    
+                    // 2. Iniciar el contador de números
+                    setTimeout(animateCounters, 200); // Pequeño retraso para que coincida con la subida
+                    
+                    observer.unobserve(entry.target); // Dejar de observar para que no se repita
+                }
+            });
+        }, { rootMargin: '0px', threshold: 0.3 }); // 0.3 = se activa cuando el 30% es visible
+
+        const statsSection = document.getElementById('stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
     </script>
 </body>
 </html>
